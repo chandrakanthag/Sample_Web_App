@@ -1,5 +1,5 @@
 document.getElementById("F").addEventListener("submit",async function(event){
-    event.preventDefault();
+    //event.preventDefault();
     let name = document.getElementById("name").value.trim();
     let number = Number(document.getElementById("number").value.trim());
     const res = await fetch("/save", {

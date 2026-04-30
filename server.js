@@ -7,7 +7,7 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://127.0.0.1:27017/student")
+mongoose.connect("mongodb+srv://webapp:Ww%406235614147@cluster0.thonqca.mongodb.net/student")
 .then(() => console.log("DB Connected"))
 .catch(err => console.log(err));
 
