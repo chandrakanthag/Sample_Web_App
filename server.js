@@ -37,8 +37,7 @@ app.post("/save", async(req, res)=> {
 });
 
 
-
-
+// search sectionls
 app.post("/search", async (req, res) => {
     try {
         const number = req.body.number;
@@ -56,6 +55,28 @@ app.post("/search", async (req, res) => {
     }
 });
 
+//delete section
+app.delete("/delete", async (req, res) => {
+
+    try {
+
+        const number = req.body.number;
+
+        const user = await User.findOneAndDelete({ number: number });
+
+        if (!user) {
+            return res.json({ message: "User not found" });
+        }
+
+        res.json({ message: "User deleted successfully" });
+
+    } catch (err) {
+
+        res.json({ message: "Error deleting user" });
+
+    }
+
+});
 
 
 app.listen(3001,"0.0.0.0", () => {
