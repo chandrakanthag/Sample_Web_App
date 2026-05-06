@@ -26,9 +26,3 @@ body{
     color: rgb(255, 0, 0);
 }
 
-.SD{
-
-    display: flex;
-    width: 10%;
-    justify-content:space-evenly;
-}
