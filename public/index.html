@@ -3,257 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Directory Manager</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
-        }
-
-        .glass-card {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(226, 232, 240, 0.8);
-        }
-
-        .input-focus {
-            transition: all 0.2s ease-in-out;
-        }
-
-        .input-focus:focus {
-            outline: none;
-            border-color: #6366f1;
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
-        }
-
-        /* Custom scrollbar for the user list */
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 10px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
-        }
-    </style>
+    <title>demo</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="min-h-screen py-8 px-4 md:px-0">
-    <div class="max-w-4xl mx-auto space-y-6">
-        
-        <!-- Header -->
-        <header class="text-center mb-8">
-            <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">User Directory</h1>
-            <p class="text-slate-500 mt-2">Manage and search your contacts efficiently</p>
-        </header>
+<body>
+<H4>Insert Details</H4>
+<form id="F" class="FRM">
+    <label>----Name----</label>
+    <input type="text" id="name">
+    <label>----Number---- </label>
+    <input type="number" id="number">
+    <button type="submit">Submit</button>
+</form>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
-            <!-- Insert Details Section -->
-            <section class="glass-card p-6 rounded-2xl shadow-sm">
-                <div class="flex items-center gap-2 mb-6">
-                    <div class="p-2 bg-indigo-100 rounded-lg">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
-                        </svg>
-                    </div>
-                    <h2 class="text-xl font-bold text-slate-800">Add New Entry</h2>
-                </div>
-
-                <form id="F" class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-1">Full Name</label>
-                        <input type="text" id="name" required placeholder="Chandrakanth" 
-                            class="w-full px-4 py-2 border border-slate-200 rounded-xl input-focus">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-1">Phone Number</label>
-                        <input type="number" id="number" required placeholder="1234567890" 
-                            class="w-full px-4 py-2 border border-slate-200 rounded-xl input-focus">
-                    </div>
-                    <button type="submit" 
-                        class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 rounded-xl transition-all duration-200 shadow-md shadow-indigo-200">
-                        Add User
-                    </button>
-                </form>
-
-                <div id="statusMsg" class="mt-4 text-sm font-medium hidden"></div>
-            </section>
-
-            <!-- Search and Action Section -->
-            <section class="glass-card p-6 rounded-2xl shadow-sm flex flex-col">
-                <div class="flex items-center gap-2 mb-6">
-                    <div class="p-2 bg-emerald-100 rounded-lg">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                    </div>
-                    <h2 class="text-xl font-bold text-slate-800">Find User</h2>
-                </div>
-
-                <div class="space-y-4 flex-grow">
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-1">Search by Number</label>
-                        <input type="number" id="searchNumber" placeholder="Enter number..." 
-                            class="w-full px-4 py-2 border border-slate-200 rounded-xl input-focus">
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-3">
-                        <button onclick="searchUser()" 
-                            class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-2.5 rounded-xl transition-all">
-                            Search
-                        </button>
-                        <button onclick="deleteUser()" 
-                            class="bg-rose-50 hover:bg-rose-100 text-rose-600 font-semibold py-2.5 rounded-xl transition-all">
-                            Delete
-                        </button>
-                    </div>
-
-                    <div id="searchResult" class="p-4 bg-slate-50 rounded-xl border border-slate-100 min-h-[80px] flex items-center justify-center text-center">
-                        <span class="text-slate-400 text-sm">Search results will appear here</span>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- User List Display (Added for better UX) -->
-        <section class="glass-card p-6 rounded-2xl shadow-sm">
-            <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
-                User Database
-                <span id="userCount" class="bg-indigo-100 text-indigo-600 px-2 py-0.5 rounded-full text-xs font-bold">0</span>
-            </h3>
-            <div class="overflow-x-auto">
-                <table class="w-full text-left">
-                    <thead>
-                        <tr class="text-slate-500 text-sm border-b border-slate-100">
-                            <th class="pb-3 font-semibold">Name</th>
-                            <th class="pb-3 font-semibold">Phone Number</th>
-                        </tr>
-                    </thead>
-                    <tbody id="userList" class="text-slate-700 text-sm">
-                        <!-- Dynamic rows -->
-                    </tbody>
-                </table>
-                <div id="emptyList" class="py-10 text-center text-slate-400">
-                    No users in the database yet.
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <script>
-        // Memory-based database
-        let users = [];
-
-        const form = document.getElementById('F');
-        const userListBody = document.getElementById('userList');
-        const emptyListMsg = document.getElementById('emptyList');
-        const userCountBadge = document.getElementById('userCount');
-        const statusMsg = document.getElementById('statusMsg');
-
-        // Initial render
-        updateUI();
-
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = document.getElementById('name').value.trim();
-            const number = document.getElementById('number').value;
-
-            if (name && number) {
-                // Check if number already exists
-                if (users.some(u => u.number === number)) {
-                    showMessage('Number already exists!', 'error');
-                    return;
-                }
-
-                users.push({ name, number });
-                form.reset();
-                showMessage('User added successfully!', 'success');
-                updateUI();
-            }
-        });
-
-        function showMessage(text, type) {
-            statusMsg.textContent = text;
-            statusMsg.classList.remove('hidden', 'text-emerald-600', 'text-rose-600');
-            statusMsg.classList.add(type === 'success' ? 'text-emerald-600' : 'text-rose-600');
-            
-            setTimeout(() => {
-                statusMsg.classList.add('hidden');
-            }, 3000);
-        }
-
-        function updateUI() {
-            userListBody.innerHTML = '';
-            userCountBadge.textContent = users.length;
-
-            if (users.length === 0) {
-                emptyListMsg.classList.remove('hidden');
-            } else {
-                emptyListMsg.classList.add('hidden');
-                users.forEach(user => {
-                    const row = document.createElement('tr');
-                    row.className = 'border-b border-slate-50 hover:bg-slate-50 transition-colors';
-                    row.innerHTML = `
-                        <td class="py-3 font-medium text-slate-800">${user.name}</td>
-                        <td class="py-3 font-mono text-slate-600">${user.number}</td>
-                    `;
-                    userListBody.appendChild(row);
-                });
-            }
-        }
-
-        function searchUser() {
-            const searchVal = document.getElementById('searchNumber').value;
-            const resultBox = document.getElementById('searchResult');
-            
-            if (!searchVal) {
-                resultBox.innerHTML = '<span class="text-rose-500 text-sm">Please enter a number to search</span>';
-                return;
-            }
-
-            const user = users.find(u => u.number === searchVal);
-
-            if (user) {
-                resultBox.innerHTML = `
-                    <div class="text-left">
-                        <p class="text-xs text-slate-400 uppercase tracking-wider font-bold">Match Found</p>
-                        <p class="text-lg font-bold text-slate-800">${user.name}</p>
-                        <p class="text-indigo-600 font-mono">${user.number}</p>
-                    </div>
-                `;
-            } else {
-                resultBox.innerHTML = '<span class="text-rose-400 text-sm font-medium">User not found</span>';
-            }
-        }
-
-        function deleteUser() {
-            const searchVal = document.getElementById('searchNumber').value;
-            const resultBox = document.getElementById('searchResult');
-
-            if (!searchVal) {
-                resultBox.innerHTML = '<span class="text-rose-500 text-sm">Enter number to delete</span>';
-                return;
-            }
-
-            const initialLength = users.length;
-            users = users.filter(u => u.number !== searchVal);
-
-            if (users.length < initialLength) {
-                resultBox.innerHTML = '<span class="text-emerald-500 font-medium">User deleted successfully</span>';
-                document.getElementById('searchNumber').value = '';
-                updateUI();
-            } else {
-                resultBox.innerHTML = '<span class="text-rose-400 text-sm font-medium">No user found with that number</span>';
-            }
-        }
-    </script>
+<h4>Search</h4>
+<p id="result"></p>
+<input type="number" id="searchNumber">
+<div class="SD">
+<button class="btn " onclick="searchUser()">Search</button>
+<button class="btn " onclick="deleteUser()">Delete</button>
+</div>
+<script src="script.js"></script>
 </body>
 </html>
+
