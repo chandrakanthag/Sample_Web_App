@@ -19,7 +19,7 @@ document.getElementById("F").addEventListener("submit",async function(event){
 });
 
 async function searchUser() {
-    document.getElementById("result").style.color = "red";
+    document.getElementById("result").style.color = "green";
     let number = Number(document.getElementById("searchNumber").value);
 
     const res = await fetch("/search", {
