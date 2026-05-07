@@ -41,7 +41,7 @@ async function searchUser() {
 
 async function deleteUser() {
 
-    document.getElementById("result").style.color = "red";
+    document.getElementById("result").style.color = "green";
 
     let number = Number(document.getElementById("searchNumber").value);
 
