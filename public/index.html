@@ -3,27 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>demo</title>
+    <title>User Directory</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-<H4>Insert Details</H4>
-<form id="F" class="FRM">
-    <label>----Name----</label>
-    <input type="text" id="name">
-    <label>----Number---- </label>
-    <input type="number" id="number">
-    <button type="submit">Submit</button>
-</form>
+<body class="min-h-screen flex items-center justify-center p-6">
 
-<h4>Search</h4>
-<p id="result"></p>
-<input type="number" id="searchNumber">
-<div class="SD">
-<button class="btn " onclick="searchUser()">Search</button>
-<button class="btn " onclick="deleteUser()">Delete</button>
-</div>
-<script src="script.js"></script>
+    <div class="w-full max-w-md space-y-6">
+        
+        <div class="text-left mb-2">
+            <h1 class="text-2xl font-bold text-slate-900 text-center">User Directory</h1>
+            <p class="text-sm text-slate-500 text-center">Contact Management System</p>
+        </div>
+
+        <div class="card shadow-sm">
+            <h4 class="text-lg font-bold mb-4 text-slate-800">Insert Details</h4>
+            <form id="F" class="space-y-4">
+                <div>
+                    <label>Name</label>
+                    <input class="in" type="text" id="name" placeholder=" ">
+                </div>
+                
+                <div>
+                    <label>Roll NO</label>
+                    <input class="in" type="number" id="number" placeholder=" ">
+                </div>
+
+                <button type="submit" class="btn-blue w-full">
+                    Submit Record
+                </button>
+            </form>
+        </div>
+
+        <div class="card shadow-sm">
+            <h4 class="text-lg font-bold mb-4 text-slate-800">Search Records</h4>
+            
+            <!-- Result container is now a simple clean box -->
+            <div id="result" class="mb-4 p-3 bg-slate-50 rounded-lg border border-slate-100 text-sm text-slate-600 min-h-[40px] flex items-center justify-center italic">
+                Enter number to search...
+            </div>
+
+            <div class="space-y-4">
+                <div>
+                    <label>Search by Roll NO</label>
+                    <input class="in" type="number" id="searchNumber" placeholder=" ">
+                </div>
+                
+                <div class="grid grid-cols-2 gap-3 SD">
+                    <button class="btn-outline" onclick="searchUser()">Search</button>
+                    <button class="btn-red" onclick="deleteUser()">Delete</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
 </body>
 </html>
-
